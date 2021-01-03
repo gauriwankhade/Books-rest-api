@@ -24,7 +24,7 @@ class Common(Configuration):
 
         # Your apps
         'test-project.users',
-
+        'test-project.books',
     )
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
