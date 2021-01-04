@@ -40,7 +40,7 @@ class Common(Configuration):
 
     ALLOWED_HOSTS = ["*"]
     ROOT_URLCONF = 'test-project.urls'
-    SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+    SECRET_KEY = 'CHANGETHISKEYFORGODSHAKE'
     WSGI_APPLICATION = 'test-project.wsgi.application'
 
     # Email
@@ -200,3 +200,19 @@ class Common(Configuration):
         ),
         'DEFAULT_FILTER_BACKENDS' : ['django_filters.rest_framework.DjangoFilterBackend']
     }
+
+
+    # celery
+    CELERY_BROKER_URL = 'redis://redis:6379'
+    CELERY_RESULT_BACKEND = 'redis://redis:6379'
+    CELERY_ACCEPT_CONTENT = ['application/json']
+    CELERY_RESULT_SERIALIZER = 'json'
+    CELERY_TASK_SERIALIZER = 'json'
+
+    #celery
+    # BROKER_URL = 'redis://localhost:6379'
+    # CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+    # CELERY_ACCEPT_CONTENT = ['application/json']
+    # CELERY_TASK_SERIALIZER = 'json'
+    # CELERY_RESULT_SERIALIZER = 'json'
+   

@@ -3,6 +3,8 @@ version: '2'
 services:
   postgres:
     image: postgres:11.6
+  redis:
+    image: redis:6.0.0
   web:
     restart: always
     environment:
@@ -27,3 +29,11 @@ services:
       - ./:/code
     ports:
       - "8001:8001"
+  worker:
+    build: ./
+    restart: always
+    volumes:
+      - .:/code
+    command: celery -A test-project worker --loglevel=info
+    depends_on:
+      - redis
