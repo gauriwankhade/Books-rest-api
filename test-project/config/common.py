@@ -3,6 +3,9 @@ from os.path import join
 from distutils.util import strtobool
 import dj_database_url
 from configurations import Configuration
+from celery.schedules import crontab #new
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -47,7 +50,7 @@ class Common(Configuration):
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
     ADMINS = (
-        ('Author', 'gauriwankhade888@gmail.com'),
+        ('Author', ''),
     )
 
     # Postgres
@@ -209,10 +212,10 @@ class Common(Configuration):
     CELERY_RESULT_SERIALIZER = 'json'
     CELERY_TASK_SERIALIZER = 'json'
 
-    #celery
-    # BROKER_URL = 'redis://localhost:6379'
-    # CELERY_RESULT_BACKEND = 'redis://localhost:6379'
-    # CELERY_ACCEPT_CONTENT = ['application/json']
-    # CELERY_TASK_SERIALIZER = 'json'
-    # CELERY_RESULT_SERIALIZER = 'json'
-   
+    #celery beat scheduler
+    CELERY_BEAT_SCHEDULE = {
+    "sample_task": {
+        "task": "test-project.books.tasks.upadte_download",
+        "schedule": crontab(minute="*/1"),
+    },
+}

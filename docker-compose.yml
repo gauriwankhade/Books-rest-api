@@ -34,6 +34,15 @@ services:
     restart: always
     volumes:
       - .:/code
-    command: celery -A test-project worker --loglevel=info
+    command: celery -A test-project worker --loglevel=DEBUG
+    depends_on:
+      - redis
+
+  celery-beat:
+    restart: always
+    build: ./
+    command: celery -A test-project beat --loglevel=DEBUG
+    volumes:
+      - .:/code
     depends_on:
       - redis

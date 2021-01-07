@@ -6,8 +6,6 @@ from rest_framework.decorators import action
 from rest_framework import filters
 from django.core.serializers import serialize
 from rest_framework.response import Response
-
-
 from .tasks import upadte_download
 # Create your views here.
 
@@ -25,14 +23,14 @@ class BookViewSet(viewsets.ModelViewSet):
 
     @action(detail=True)     
     def download(self,request,**kwargs):
-        pk = self.kwargs.get('pk')
-        book = Book.objects.get(pk=pk)
-        print(book.url)
-        # data = serialize("json", book)
-        # return HttpResponse(data, content_type="application/json")
-        # import ipdb; ipdb.set_trace();
-        task = upadte_download.delay(book.id)
+        # pk = self.kwargs.get('pk')
+        # book = Book.objects.get(pk=pk)  
+
+        # if not book.is_downloaded:         
+        #     task = upadte_download.delay(book.id)           
+        #     return Response("Added to Downloads")
         
-        return Response("hello1")
-        
-    
+        # return Response("Downloaded..")
+
+        task = upadte_download.delay()           
+        return Response("Added to Downloads")
