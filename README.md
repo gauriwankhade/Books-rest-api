@@ -1,7 +1,5 @@
 # test-project-web
 
-[![Build Status](https://travis-ci.org/gauriwankhade/test-project-web.svg?branch=master)](https://travis-ci.org/gauriwankhade/test-project-web)
-
 # Prerequisites
 
 - [Docker](https://docs.docker.com/docker-for-mac/install/)  
